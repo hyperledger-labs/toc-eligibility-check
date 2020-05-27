@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+	</head>
+	<body>
+		<p>Enter your email address below and click the button to verify if you're eligible to vote.</p>
+		<form id="frm">
+			Email: <input id="email" type="text" name="email"><br>
+			<input type="button" onclick="check()" value="Check">
+		</form>
+	</body>
+	<script src="md5.js"></script>
+	<script src="hashes.js"></script>
+	<script>
+		function check() {
+			let email = document.getElementById("email").value;
+			console.log(email);
+			let hash = md5(email);
+			console.log(hash);
+			if (Hashes.check(hash)) {
+				alert("You're eligible to vote");
+			} else {
+				alert("You are not eligible to vote");
+			}
+		}
+	</script>
+</html>
