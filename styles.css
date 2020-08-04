@@ -24,6 +24,10 @@ label {
     color: #34495e;
 }
 
+a {
+ color: white;
+}
+
 .pure-img-responsive {
     max-width: 100%;
     height: auto;
