@@ -32,7 +32,7 @@
 	<script src="hashes.js"></script>
 	<script>
 		function check() {
-			let email = document.getElementById("email").value;
+			let email = document.getElementById("email").value.trim().toLowerCase();
 			console.log(email);
 			let hash = md5(email);
 			console.log(hash);
