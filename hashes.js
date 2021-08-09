@@ -3,7 +3,7 @@
 class Hashes {
     static check(hash) {
         const hashes = {
-        "314e1e0d0b048f587f4a3d44b15f95c8":"",
+        "1e71edbf25822df394f992c490bf0034":"",
         };
         return hashes.hasOwnProperty(hash);
     }
