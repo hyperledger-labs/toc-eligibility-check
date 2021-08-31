@@ -20,11 +20,10 @@
 				Check your email address to confirm<br>if you are eligible to vote:
 				</p>
 				<form id="frm">
-					<input id="email" type="text" name="email">
+					<input id="email" type="text" name="email" onkeypress="handle(event)">
 					<input type="button" onclick="check()" value="Check">
 				</form>
-				<p id="success" class="splash-subhead" style="visibility: hidden">You are eligible to vote!</p>
-				<p id="failure" class="splash-subhead" style="visibility: hidden">You are not eligible to vote.<br>If you think this is an error, please email <a href="mailto:election@lists.hyperledger.org?subject=Voter Eligibility&body=My name:\n\nMy email:\n\nI believe I should be eligible to vote because...">the election staff.</a></p>
+				<p class="splash-subhead" id="results"></p>
 			</div>
 		</div>
 	</body>
@@ -37,15 +36,16 @@
 			let hash = md5(email);
 			console.log(hash);
 			if (Hashes.check(hash)) {
-				success = document.getElementById("success");
-				success.style.visibility = "visible";
-				failure = document.getElementById("failure");
-				failure.style.visibility = "hidden";
+				document.getElementById("results").innerHTML = "You are eligible to vote!"
 			} else {
-				success = document.getElementById("success");
-				success.style.visibility = "hidden";
-				failure = document.getElementById("failure");
-				failure.style.visibility = "visible";
+				document.getElementById("results").innerHTML = 'You are not eligible to vote.<br>If you think this is an error, please email <a href="mailto:election@lists.hyperledger.org?subject=Voter Eligibility&body=My name:\n\nMy email:\n\nI believe I should be eligible to vote because...">the election staff.</a>'
+			}
+		}
+
+		function handle(e) {
+			if(e.keyCode === 13) {
+				e.preventDefault();
+				check();
 			}
 		}
 	</script>
