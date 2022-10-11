@@ -39,7 +39,7 @@ Thu Oct 28 09:46:07 PDT 2021
 			console.log(hash);
 			let [eligibleToVote, eligibleToRun] = Hashes.check(hash);
 			if (eligibleToVote && eligibleToRun) {
-				document.getElementById("results").innerHTML = "You are eligible to vote and run."
+				document.getElementById("results").innerHTML = "You are eligible to vote.<br>You are eligible to run."
 			} else if (eligibleToVote) {
 				document.getElementById("results").innerHTML = "You are eligible to vote."
 			} else if (eligibleToRun) {
