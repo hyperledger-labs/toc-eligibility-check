@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="Hyperledger Voter Eligibility Check">
-		<title>Hyperledger Voter Eligibility Check</title>
+		<meta name="description" content="Hyperledger TOC Eligibility Check">
+		<title>Hyperledger TOC Eligibility Check</title>
 		<link rel="stylesheet" href="/pure-min.css">
 		<link rel="stylesheet" href="/grids-responsive-min.css">
 		<link rel="stylesheet" href="/font-awesome.css">
@@ -17,14 +17,14 @@
 					<img src="hf-logo.png" width="300" height"58" alt="">
 				</h1>
 				<p class="splash-subhead">
-				Check your email address to confirm<br>if you are eligible to vote:
+				Check your GitHub ID to confirm<br>your eligibility:
 				</p>
 				<form id="frm">
-					<input id="email" type="text" name="email" onkeypress="handle(event)">
+					<input id="githubID" type="text" name="githubID" onkeypress="handle(event)">
 					<input type="button" onclick="check()" value="Check">
 				</form>
 				<p class="splash-subhead" id="results"></p>
-Voter hashes updated
+Hashes updated
 Thu Oct 28 09:46:07 PDT 2021
 			</div>
 		</div>
@@ -33,14 +33,19 @@ Thu Oct 28 09:46:07 PDT 2021
 	<script src="hashes.js"></script>
 	<script>
 		function check() {
-			let email = document.getElementById("email").value.trim().toLowerCase();
-			console.log(email);
-			let hash = md5(email);
+			let githubID = document.getElementById("githubID").value.trim().toLowerCase();
+			console.log(githubID);
+			let hash = md5(githubID);
 			console.log(hash);
-			if (Hashes.check(hash)) {
-				document.getElementById("results").innerHTML = "You are eligible to vote!"
+			let [eligibleToVote, eligibleToRun] = Hashes.check(hash);
+			if (eligibleToVote && eligibleToRun) {
+				document.getElementById("results").innerHTML = "You are eligible to vote and run."
+			} else if (eligibleToVote) {
+				document.getElementById("results").innerHTML = "You are eligible to vote."
+			} else if (eligibleToRun) {
+				document.getElementById("results").innerHTML = "You are eligible to run."
 			} else {
-				document.getElementById("results").innerHTML = 'You are not eligible to vote.<br>If you think this is an error, please email <a href="mailto:election@lists.hyperledger.org?subject=Voter Eligibility&body=My name:\n\nMy email:\n\nI believe I should be eligible to vote because...">the election staff.</a>'
+				document.getElementById("results").innerHTML = 'You are not eligible to vote nor run.<br>If you think this is an error, please email <a href="mailto:election@lists.hyperledger.org?subject=TOC Eligibility&body=My name:\n\nMy email:\n\nMy GitHub ID\n\nI believe I should be eligible to vote/run because...">the election staff.</a>'
 			}
 		}
 
